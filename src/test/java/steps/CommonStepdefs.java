@@ -16,6 +16,35 @@ public class CommonStepdefs extends CommonPage {
         getUrl(url);
     }
 
+    @And("I select the {string} link")
+    public void iSelectTheFindCompanyInformationLink(String linkText) throws InterruptedException {
+        Thread.sleep(10000);
+        switch (linkText){
+            case "Find company information":
+                clickOnCompanyInformation();
+                break;
+            case "GREGGS PLC":
+                clickOnFirstCompanyLink();
+                break;
+        }
+
+    }
+
+    @Then("I should be on the {string} page")
+    public void iShouldBeOnTheGetInformationAboutACompanyPage(String expectedText) {
+        String actualText = CompanyInformationPageText();
+        Assert.assertEquals("Doesn't match", actualText, expectedText);
+    }
+
+    @And("I click the Start now button")
+    public void iClickTheStartNowButton() {
+         clickStartButton();
+    }
+
+    @When("I search for company {string} and view the company details")
+    public void iSearchForCompanyGREGGSPLCAndViewTheCompanyDetails(String testData) {
+         enterDataInSearchBox(testData);
+    }
 
     @Then("I validate that the details are displayed")
     public void iValidateThatTheDetailsAreDisplayed(DataTable dataTable) {
@@ -38,4 +67,8 @@ public class CommonStepdefs extends CommonPage {
     }
 
 
+    @And("I accept the cookie session")
+    public void iAcceptTheCookieSession() throws InterruptedException {
+        acceptCookie();
+    }
 }
